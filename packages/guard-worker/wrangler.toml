@@ -1,0 +1,32 @@
+name = "cf-static-guard"
+main = "src/index.ts"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Worker always runs first so every asset requires auth (except /auth/* and /health).
+[assets]
+directory = "./assets/site"
+binding = "ASSETS"
+run_worker_first = true
+
+# Non-secret defaults. Override in dashboard / wrangler secret / .dev.vars.
+[vars]
+GUARD_MODE = "normal"
+PUBLIC_PATHS = "/health"
+# SPA fallback: set to "true" for client-side routers; "false" for multi-page static sites.
+SPA_FALLBACK = "false"
+SESSION_TTL_SECONDS = "604800"
+# Optional: custom origin for OAuth callback (behind tunnel / custom domain)
+# OAUTH_REDIRECT_BASE = "https://docs.example.com"
+
+# Create once: wrangler kv namespace create RULES
+# Then put the id below (or via dashboard).
+# [[kv_namespaces]]
+# binding = "RULES"
+# id = "<your-kv-namespace-id>"
+
+# Secrets (local: packages/guard-worker/.dev.vars | prod: wrangler secret put <NAME>):
+#   GITHUB_CLIENT_ID
+#   GITHUB_CLIENT_SECRET
+#   SESSION_SECRET
+#   ADMIN_PASSWORD          # /admin 后台密码，不设则禁用后台

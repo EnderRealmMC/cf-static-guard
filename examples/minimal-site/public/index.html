@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Private Docs · Protected</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo">CG</span>
+      <div>
+        <strong>cf-static-guard</strong>
+        <div class="muted">示例静态站 · 所有资源均需登录后访问</div>
+      </div>
+    </div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/guide.html">指南</a>
+      <a href="/auth/me" class="btn-link">会话</a>
+      <a href="/auth/logout" class="btn-link danger">退出</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Cloudflare Worker OAuth Guard</p>
+      <h1>这是被守卫保护的静态页面</h1>
+      <p class="lead">
+        未登录时任意路径（包括 favicon、CSS、JS）都会被拦截并跳转登录。
+        心跳探针 <code>/health</code> 不需要鉴权，便于监控。
+      </p>
+      <div class="chips">
+        <span class="chip">GitHub OAuth</span>
+        <span class="chip">JWT Session</span>
+        <span class="chip">Strict / Normal</span>
+        <span class="chip">KV Rules</span>
+      </div>
+    </section>
+    <section class="grid">
+      <article class="card">
+        <h2>普通模式</h2>
+        <p>OAuth 登录成功即可访问；blocklist 仍会拒绝。</p>
+      </article>
+      <article class="card">
+        <h2>严格模式</h2>
+        <p>可按 Provider 配置组织、团队、账号年龄、白名单等规则。</p>
+      </article>
+      <article class="card">
+        <h2>通用静态站</h2>
+        <p>不限文档站：任意构建产物（HTML / SPA）均可挂载。</p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <span>cf-static-guard example</span>
+    <a href="/auth/me">/auth/me</a>
+  </footer>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "cf-static-guard",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Cloudflare Worker guard that protects any static site behind OAuth",
+  "workspaces": [
+    "packages/guard-worker",
+    "packages/login-ui",
+    "packages/admin-ui",
+    "examples/minimal-site"
+  ],
+  "scripts": {
+    "build:login": "npm run build -w @cf-static-guard/login-ui",
+    "build:admin": "npm run build -w @cf-static-guard/admin-ui",
+    "build:example": "npm run build -w @cf-static-guard/minimal-site",
+    "build:worker": "npm run build -w @cf-static-guard/guard-worker",
+    "build": "npm run build:login && npm run build:admin && npm run build:example && npm run sync-assets && npm run build:worker",
+    "sync-assets": "node scripts/sync-assets.mjs",
+    "setup": "node scripts/setup.mjs",
+    "dev": "npm run build:login && npm run build:admin && npm run build:example && npm run sync-assets && npm run dev -w @cf-static-guard/guard-worker",
+    "dev:ui": "npm run dev -w @cf-static-guard/login-ui",
+    "dev:admin": "npm run dev -w @cf-static-guard/admin-ui",
+    "deploy": "npm run build && npm run deploy -w @cf-static-guard/guard-worker",
+    "typecheck": "npm run typecheck -w @cf-static-guard/guard-worker && npm run typecheck -w @cf-static-guard/login-ui && npm run typecheck -w @cf-static-guard/admin-ui"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

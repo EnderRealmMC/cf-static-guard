@@ -1,0 +1,56 @@
+# deps
+node_modules/
+.pnp
+.pnp.*
+
+# build
+dist/
+dist-ssr/
+*.local
+packages/guard-worker/assets/site/
+packages/login-ui/dist/
+packages/admin-ui/dist/
+examples/minimal-site/dist/
+admin.jar
+wrangler-dev.err
+wrangler-dev.log
+*.jar
+
+# wrangler / cloudflare
+.wrangler/
+.dev.vars
+.dev.vars.*
+.mf/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# editor / os
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# test / coverage
+coverage/
+*.lcov
+
+# typescript
+*.tsbuildinfo
