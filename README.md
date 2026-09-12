@@ -14,8 +14,48 @@ Cloudflare Worker 守卫：把**任意静态站构建产物**挂在 Worker Asset
 - **登录 UI**：Vue 3（`packages/login-ui`），文案可配置
 - **管理后台** `/admin`：Vue 3（`packages/admin-ui`），改规则 / 文案 / 备案
 - **可配置文案**：标题、版权、ICP、徽章/图标开关，存 KV，登录页实时读取
+- **CLI `csg`**：不 clone 本仓库即可部署；不向你的站点项目写配置文件
 
-## 快速开始
+## 使用者：CLI（推荐）
+
+安装（发布到 npm 后）：
+
+```bash
+npm i -g @enderrealmmc/cf-static-guard
+# 或开发仓库内：npm run csg -- --help
+```
+
+```bash
+csg auth
+csg init                          # 交互：Worker 名 / OAuth / 密钥 / KV
+csg deploy --site ./dist          # 部署或更新静态资产（仅用系统临时目录）
+
+# 之后日常
+csg deploy --site ./docs/.vitepress/dist
+
+# 线上改规则/文案（与 /admin 同一套 KV）
+csg config set-mode strict
+csg config org-add EnderRealmMC
+csg config ui set icp "京ICP备xxxxxx号"
+csg open admin --base https://<your-worker-domain>
+```
+
+| 位置 | 内容 |
+|------|------|
+| `%APPDATA%/csg` 或 `~/.config/csg` | 仅 profile（worker 名、KV id…） |
+| Cloudflare Secrets / KV | 密钥、规则、文案 |
+| 你的站点目录 | **不写入任何 csg 文件** |
+
+开发者 monorepo 构建 CLI：
+
+```bash
+npm run build          # UIs + worker bundle + cli + copy-worker
+npm run csg -- doctor
+```
+
+---
+
+## 开发者：从源码跑（clone 本仓库）
 
 ### 1. 安装依赖
 

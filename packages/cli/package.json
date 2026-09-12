@@ -1,0 +1,40 @@
+{
+  "name": "@enderrealmmc/cf-static-guard",
+  "version": "0.1.0",
+  "description": "CLI to deploy and manage a Cloudflare Worker guard for any static site",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EnderRealmMC/cf-static-guard.git"
+  },
+  "bin": {
+    "csg": "bin/csg.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "dist-worker",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-worker.mjs",
+    "prepack": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.4.1",
+    "commander": "^13.1.0",
+    "execa": "^9.5.2",
+    "picocolors": "^1.1.1",
+    "wrangler": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  }
+}

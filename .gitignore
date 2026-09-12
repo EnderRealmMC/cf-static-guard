@@ -10,6 +10,8 @@ dist-ssr/
 packages/guard-worker/assets/site/
 packages/login-ui/dist/
 packages/admin-ui/dist/
+packages/cli/dist/
+packages/cli/dist-worker/
 examples/minimal-site/dist/
 admin.jar
 wrangler-dev.err

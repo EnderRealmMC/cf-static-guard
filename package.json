@@ -7,6 +7,7 @@
     "packages/guard-worker",
     "packages/login-ui",
     "packages/admin-ui",
+    "packages/cli",
     "examples/minimal-site"
   ],
   "scripts": {
@@ -14,14 +15,16 @@
     "build:admin": "npm run build -w @cf-static-guard/admin-ui",
     "build:example": "npm run build -w @cf-static-guard/minimal-site",
     "build:worker": "npm run build -w @cf-static-guard/guard-worker",
-    "build": "npm run build:login && npm run build:admin && npm run build:example && npm run sync-assets && npm run build:worker",
+    "build:cli": "npm run build -w @enderrealmmc/cf-static-guard",
+    "build": "npm run build:login && npm run build:admin && npm run build:example && npm run sync-assets && npm run build:worker && npm run build:cli",
     "sync-assets": "node scripts/sync-assets.mjs",
     "setup": "node scripts/setup.mjs",
     "dev": "npm run build:login && npm run build:admin && npm run build:example && npm run sync-assets && npm run dev -w @cf-static-guard/guard-worker",
     "dev:ui": "npm run dev -w @cf-static-guard/login-ui",
     "dev:admin": "npm run dev -w @cf-static-guard/admin-ui",
+    "csg": "node packages/cli/bin/csg.js",
     "deploy": "npm run build && npm run deploy -w @cf-static-guard/guard-worker",
-    "typecheck": "npm run typecheck -w @cf-static-guard/guard-worker && npm run typecheck -w @cf-static-guard/login-ui && npm run typecheck -w @cf-static-guard/admin-ui"
+    "typecheck": "npm run typecheck -w @cf-static-guard/guard-worker && npm run typecheck -w @cf-static-guard/login-ui && npm run typecheck -w @cf-static-guard/admin-ui && npm run typecheck -w @enderrealmmc/cf-static-guard"
   },
   "engines": {
     "node": ">=20"
