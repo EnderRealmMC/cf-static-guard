@@ -25,6 +25,7 @@ interface InitOpts {
   push?: boolean;
   spa?: boolean;
   redirectBase?: string;
+  customDomain?: string;
 }
 
 export function registerInit(program: Command): void {
@@ -43,6 +44,7 @@ export function registerInit(program: Command): void {
     .option('--create-kv', 'Create a new KV namespace named RULES')
     .option('--spa', 'Enable SPA index fallback')
     .option('--redirect-base <url>', 'OAuth redirect base origin')
+    .option('--custom-domain <host>', 'Attach custom domain to worker (e.g. docs.example.com)')
     .option('--push', 'Push auth/ui config to KV after setup')
     .option('--non-interactive', 'Fail instead of prompting when required values are missing')
     .action(async (opts: InitOpts) => {
@@ -88,6 +90,7 @@ export function registerInit(program: Command): void {
       profile.mode = mode;
       if (opts.spa) profile.spaFallback = true;
       if (opts.redirectBase) profile.oauthRedirectBase = opts.redirectBase;
+      if (opts.customDomain) profile.customDomain = opts.customDomain;
 
       // GitHub
       let clientId = opts.githubClientId || profile.providers.github?.clientId || process.env.CSG_GITHUB_CLIENT_ID;

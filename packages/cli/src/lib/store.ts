@@ -45,6 +45,8 @@ export interface CsgProfile {
   kvNamespaceId?: string;
   /** accountId from wrangler, optional */
   accountId?: string;
+  /** Custom domain attached to the worker */
+  customDomain?: string;
   providers: {
     github?: ProviderProfile;
   };

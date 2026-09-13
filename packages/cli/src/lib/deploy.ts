@@ -29,11 +29,19 @@ id = "${profile.kvNamespaceId}"
     ? `\nOAUTH_REDIRECT_BASE = "${profile.oauthRedirectBase}"`
     : '';
 
+  const customDomain = profile.customDomain
+    ? `
+[[routes]]
+pattern = "${profile.customDomain}"
+custom_domain = true
+`
+    : '';
+
   return `name = "${profile.name}"
 main = "worker.js"
 compatibility_date = "2025-03-01"
 compatibility_flags = ["nodejs_compat"]
-
+${customDomain}
 [assets]
 directory = "./assets/site"
 binding = "ASSETS"
